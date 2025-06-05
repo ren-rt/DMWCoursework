@@ -1,14 +1,12 @@
 <?php 
 $host = 'localhost';
 $username = 'root';
-$password='';
+$password = '';
 $database = 'ultracare';
 
-$conn = mysqli_connect($host, $username, $password, $database);
-if(!$conn)
-{
+$conn = mysqli_connect($host,$username,$password,$database);
+if(!$conn){
     die("Connection failed" . mysqli_connect_error());
 }
-
-echo "connected";
+//echo "connected";
 ?>
