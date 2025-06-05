@@ -1,23 +1,21 @@
 <?php
-include 'conf.php';
+include "conf.php";     
 
-// Get values from the form in doctornotes.php
-$patientName = $_POST['name'];
-$age = $_POST['age'];
-$note = $_POST['notes'];
-$date = $_POST['date'];
+
+
+$name = $_POST['name'];
 $diagnosis = $_POST['diagnosis'];
 $treatment = $_POST['treatment'];
+$date = $_POST['date'];
+$doctor = $_POST['doctor'];
 
-$sql = "INSERT INTO doctor_notes (patientName, age, diagnosis, treatment, notes)
-        VALUES ('$patientName','$age', '$diagnosis', '$treatment', '$note')";
+$sql = "INSERT INTO prescription_records (name, diagnosis, treatment, date, doctor)
+        VALUES ('$name', '$diagnosis', '$treatment', '$date', '$doctor')";
 
-if (mysqli_query($conn, $sql)) {
-    echo "<script>
-        alert('Doctor note added successfully!');
-        window.location.href = '/renu/coursework final/DocNotes/doctornotes.php';
-    </script>";
+if ($conn->query($sql) === TRUE) {
+    echo "Record inserted successfully!";
 } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error: " . $conn->error;
 }
+$conn->close();
 ?>
