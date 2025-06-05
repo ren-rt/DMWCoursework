@@ -1,26 +1,23 @@
 <?php
 include 'conf.php';
 
-$name  = $_POST['name'];
-$age   = $_POST['age'];
-$pno   = $_POST['pno'];
-$email = $_POST['email'];
-$date         = $_POST['date'];
-$specialisation = $_POST['doctorspec'];
-$doctor       = $_POST['doctorList'];
+// Get values from the form in doctornotes.php
+$patientName = $_POST['name'];
+$age = $_POST['age'];
+$note = $_POST['notes'];
+$date = $_POST['date'];
+$diagnosis = $_POST['diagnosis'];
+$treatment = $_POST['treatment'];
 
-$sql = "INSERT INTO patient_details (patientName, patientAge, patientPhone, patientEmail, appointmentdate, specialisation, doctor)
-        VALUES ('$name', '$age', '$pno', '$email', '$date', '$specialisation', '$doctor')";
+$sql = "INSERT INTO doctor_notes (patientName, age, diagnosis, treatment, notes)
+        VALUES ('$patientName','$age', '$diagnosis', '$treatment', '$note')";
 
 if (mysqli_query($conn, $sql)) {
-    // Set flag in localStorage and redirect back to html page
     echo "<script>
-        alert('Appointment booked successfully!');
-        window.location.href = 'http://localhost/renu/coursework%20final/dashboard.php';
+        alert('Doctor note added successfully!');
+        window.location.href = '/renu/coursework final/DocNotes/doctornotes.php';
     </script>";
 } else {
-    echo 'Error: ' . mysqli_error($conn);
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
-
-mysqli_close($conn);
 ?>
